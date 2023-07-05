@@ -25,19 +25,21 @@ SECRET_KEY = 'django-insecure-5$h+6w_wzpbgdmdf8o4z89v2*8&*!eh-^$l3s_mjj(@wbqf%%=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost','127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.AccountConfig',
+    'account.apps.AccountConfig',    
     'django.contrib.admin',
     'django.contrib.auth',    
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'images.apps.ImagesConfig',
   
 ]
 
@@ -122,10 +124,27 @@ LOGOUT_URL ='logged_out'
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 #Send emails
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = [
+
+'django.contrib.auth.backends.ModelBackend',
+'account.authentication.EmailAuthBackend',
+
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SECURE_CONTENT_TYPE_NOSNIFF = False 
+SECURE_BROWSER_XSS_FILTER = False 
+SECURE_SSL_REDIRECT = False 
+SESSION_COOKIE_SECURE = False 
+CSRF_COOKIE_SECURE = False
+X_FRAME_OPTIONS = 'DENY'
